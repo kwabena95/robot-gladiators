@@ -99,6 +99,17 @@ const startGame = () => {
         }
     }
 
+    fight(pickedEnemyName);
+    if (playHealth > 0 && i < enemyNames.length - 1) {
+        // ask if player wants to use the store before next round
+        const storeConfirm = confirm("The fight is over, visit the store before the next round?");
+        // if yes, take them to the store() function
+        if (storeConfirm) {
+            shop();
+        }
+
+    }
+
     // end game
     endGame();
 };
@@ -122,7 +133,53 @@ const endGame = () => {
 
 };
 
+// shop function
+const shop = () => {
+    // ask player what they'd like to do
+    const shopOptionPrompt = prompt(
+        "Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? Please enter one: 'REFILL', 'UPGRADE', or 'LEAVE' to make a choice."
+    );
 
+    switch (shopOptionPrompt) {
+        case "REFILL":
+        case "refill":
+            if (playerMoney >= 7) {
+                console.log("Refilling player's health by 20 for 7 dollars.");
+
+                //   increase health and decrease money
+                playerHealth += 20;
+                playerMoney -= 7;
+            } else {
+                console.log("You do not have enough money!");
+            }
+
+            break;
+        case "UPGRADE":
+        case "upgrade":
+            if (playerMoney >= 7) {
+                console.log("Upgrading player's attack by 6 for 7 dollars.");
+
+                // increase attack and decrease money
+                playerAttack += 6;
+                playerMoney -= 7;
+            } else {
+                console.log("You don't have enough money!");
+            }
+
+            break;
+        case "LEAVE":
+        case "leave":
+            console.log("leaving the store.");
+            break;
+        default:
+            console.log("You did not pick a valid option. Try again.");
+
+            // call shop() again
+            shop();
+            break;
+
+    }
+};
 
 
 
