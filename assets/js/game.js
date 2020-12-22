@@ -82,7 +82,7 @@ const fight = (enemyName) => {
                 playerMoney -= 10;
 
                 // call shop()
-
+                shop();
                 break;
             }
         }
@@ -106,6 +106,7 @@ const fight = (enemyName) => {
             // if yes, take them to the shop()
             if (storeConfirm) {
                 // call shop()
+                shop();
             }
             break;
         } else {
@@ -132,6 +133,9 @@ const fight = (enemyName) => {
     }
 
 }
+
+// start first game when page loads
+startGame();
 
 
 // shop function
