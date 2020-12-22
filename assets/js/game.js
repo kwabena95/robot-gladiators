@@ -67,31 +67,62 @@ const fight = (enemyName) => {
 
 }
 
+const startGame = () => {
+    playerHealth = 100;
+    playerAttack = 10;
+    playerMoney = 10;
 
-for (let i = 0; i < enemyNames.length; i++) {
+    for (let i = 0; i < enemyNames.length; i++) {
 
-    // if player is still alive, keep fighting
-    if (playerHealth > 0) {
+        // if player is still alive, keep fighting
+        if (playerHealth > 0) {
 
-        // let the player know what round they are in
-        console.log('Welcome to Robot Gladiators!' + (i + 1));
+            // let the player know what round they are in
+            console.log('Welcome to Robot Gladiators!' + (i + 1));
 
-        // pick new enemy from array
-        let pickedEnemyName = enemyNames[i];
+            // pick new enemy from array
+            let pickedEnemyName = enemyNames[i];
 
-        // reset next enemy health
-        enemyHealth = 50;
+            // reset next enemy health
+            enemyHealth = 50;
 
-        // use debugger to pause script from running and check what's going on at that moment in the code
-        debugger;
+            // use debugger to pause script from running and check what's going on at that moment in the code
+            debugger;
 
-        // pass the pickedEnemyName variable's value into the fight function, where it will assume the value of the enemyName parameter
-        fight(pickedEnemyName);
+            // pass the pickedEnemyName variable's value into the fight function, where it will assume the value of the enemyName parameter
+            fight(pickedEnemyName);
 
-    } else {
-        // alert user that they have lost.
-        console.log("You have lost your robot in battle! Game Over!");
-        break;
+        } else {
+            // alert user that they have lost.
+            console.log("You have lost your robot in battle! Game Over!");
+            break;
+        }
     }
-}
+
+    // end game
+    endGame();
+};
+
+// end entire game
+const endGame = () => {
+    // if player is alive, player win!
+    if (playerHealth > 0) {
+        // ask if player wants to play again
+        const playAgainConfirm = confirm('Would you like to play again?');
+        if (playAgainConfirm) {
+            //restart game
+            startGame();
+        } else {
+            console.log("Thank you for playing Robot Gladiators! Come back soon!");
+        }
+        console.log(`"Great job, you've survived the game! You now have a score of ${playerMoney}.`);
+    } else {
+        console.log("You've lost your robot in battle.");
+    }
+
+};
+
+
+
+
 
