@@ -9,6 +9,60 @@ let enemyNames = ["Roborto", "Amy Android", "Robo Trumble"];
 let enemyHealth = 50;
 let enemyAttack = 12;
 
+const startGame = () => {
+    playerHealth = 100;
+    playerAttack = 10;
+    playerMoney = 10;
+
+    for (let i = 0; i < enemyNames.length; i++) {
+
+        // if player is still alive, keep fighting
+        if (playerHealth > 0) {
+
+            // let the player know what round they are in
+            console.log('Welcome to Robot Gladiators!' + (i + 1));
+
+            // pick new enemy from array
+            let pickedEnemyName = enemyNames[i];
+
+            // reset next enemy health
+            enemyHealth = 50;
+
+            // pass the pickedEnemyName variable's value into the fight function, where it will assume the value of the enemyName parameter
+            fight(pickedEnemyName);
+
+        } else {
+            break;
+        }
+    }
+
+    // end game
+    endGame();
+};
+
+// end entire game
+const endGame = () => {
+    console.log("The game has now ended. Let's see how you did!");
+
+    // if player is alive, player win!
+    if (playerHealth > 0) {
+
+        console.log(`"Great job, you've survived the game! You now have a score of ${playerMoney}.`);
+    } else {
+        console.log("You've lost your robot in battle.");
+    }
+
+    //ask if player wants to play again
+    const playAgainConfirm = confirm('Would you like to play again?');
+    if (playAgainConfirm) {
+        //restart game
+        startGame();
+
+    } else {
+        console.log("Thank you for playing Robot Gladiators! Come back soon!");
+    }
+};
+
 const fight = (enemyName) => {
     // Alert players that they are starting the round
     console.log('Welcome to Robot Gladiators');
@@ -26,6 +80,9 @@ const fight = (enemyName) => {
 
                 // subtract money from player money
                 playerMoney -= 10;
+
+                // call shop()
+
                 break;
             }
         }
@@ -41,7 +98,15 @@ const fight = (enemyName) => {
         // check enemy's health
         if (enemyHealth <= 0) {
             console.log(`${enemyName} has died!`);
+
+            // award player money for winning
             playerMoney += 20;
+            // ask if player wants to use the store before nex round
+            const storeConfirm = confirm('The fight is over, visit the store before the next round?');
+            // if yes, take them to the shop()
+            if (storeConfirm) {
+                // call shop()
+            }
             break;
         } else {
             console.log(`${enemyName} still has ${enemyHealth} health left.`);
@@ -58,6 +123,7 @@ const fight = (enemyName) => {
         // check player's health
         if (playerHealth <= 0) {
             console.log(`${playerName} has died!`);
+            // leave loop if player dies
             break;
         } else {
             console.log(`${playerName} still has ${playerHealth} health left.`);
