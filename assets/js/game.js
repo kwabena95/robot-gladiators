@@ -102,7 +102,7 @@ const fight = (enemyName) => {
             // award player money for winning
             playerMoney += 20;
             // ask if player wants to use the store before nex round
-            const storeConfirm = confirm('The fight is over, visit the store before the next round?');
+            let storeConfirm = confirm('The fight is over, visit the store before the next round?');
             // if yes, take them to the shop()
             if (storeConfirm) {
                 // call shop()
