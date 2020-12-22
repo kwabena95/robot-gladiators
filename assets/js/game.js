@@ -134,8 +134,7 @@ const fight = (enemyName) => {
 
 }
 
-// start first game when page loads
-startGame();
+
 
 
 // shop function
@@ -185,6 +184,9 @@ const shop = () => {
 
     }
 };
+
+// start first game when page loads
+startGame();
 
 
 
