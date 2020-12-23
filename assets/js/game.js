@@ -9,6 +9,8 @@ let enemyNames = ["Roborto", "Amy Android", "Robo Trumble"];
 let enemyHealth = 50;
 let enemyAttack = 12;
 
+const randomNumber = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
+
 const startGame = () => {
     playerHealth = 100;
     playerAttack = 10;
@@ -26,7 +28,7 @@ const startGame = () => {
             let pickedEnemyName = enemyNames[i];
 
             // reset next enemy health
-            enemyHealth = 50;
+            enemyHealth = randomNumber(40, 60);
 
             // pass the pickedEnemyName variable's value into the fight function, where it will assume the value of the enemyName parameter
             fight(pickedEnemyName);
@@ -79,7 +81,7 @@ const fight = (enemyName) => {
                 console.log(`${playerName} has decided to skip this fight. Goodbye!`);
 
                 // subtract money from player money
-                playerMoney -= 10;
+                playerMoney = Math.max(0, playerMoney - 10);
 
                 // call shop()
                 shop();
@@ -88,7 +90,8 @@ const fight = (enemyName) => {
         }
 
         /*Subtract the value of `playerAttack` from the value of `enemyHealth` and use that result to update the value in the `enemyHealth` variable*/
-        enemyHealth -= playerAttack;
+        let damage = randomNumber(playerAttack - 3, playerAttack);
+        enemyHealth = Math.max(0, enemyHealth - damage);
 
         // Log a resulting message to the console so we know that it worked.
         let enemyResult = `${playerName} attacked ${enemyName}. ${enemyName}, now has ${enemyHealth} health remaining.`;
@@ -113,8 +116,9 @@ const fight = (enemyName) => {
             console.log(`${enemyName} still has ${enemyHealth} health left.`);
         }
 
-        /* Subtract the value of `enemyAttack` from the value of `playerHealth` and use that result to update the value in the `playerHealth` variable.*/
-        playerHealth -= enemyAttack;
+        /* Subtract the value of `enemyAttack` from the value of `playerHealth` and use that result to update the value in the `playerHealth` variable.*/cal
+        damage = randomNumber(enemyAttack - 3, playerAttack);
+        playerHealth = Math.max(0, playerHealth - damage);
 
         // Log a resulting message to the console so we know that it worked.
         let PlayerResult = `${enemyName} attacked ${playerName}. ${playerName}, now has ${playerHealth} health remaining.`;
