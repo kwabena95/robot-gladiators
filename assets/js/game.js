@@ -30,6 +30,14 @@ const startGame = () => {
     endGame();
 };
 
+// function to set name
+const getPlayerName = () => {
+    let name = "";
+    while (name === "" || name === null) {
+        name = prompt("What is your robot's name?");
+    }
+    return name;
+}
 // end entire game
 const endGame = () => {
     console.log("The game has now ended. Let's see how you did!");
@@ -158,7 +166,7 @@ const shop = () => {
 
 // player object info
 const playerInfo = {
-    name: prompt("What is your robot's name?"),
+    name: getPlayerName(),
     health: 100,
     attack: 10,
     money: 10,
