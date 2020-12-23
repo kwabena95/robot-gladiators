@@ -215,6 +215,6 @@ console.log("Enemy attack point:", enemyInfo[0]['attack']);
 
 // start first game when page loads
 
-
+startGame();
 
 
