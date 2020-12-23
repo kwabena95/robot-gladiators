@@ -69,10 +69,25 @@ const getPlayerName = () => {
     }
     return name;
 }
+
 // end entire game
 const endGame = () => {
     console.log("The game has now ended. Let's see how you did!");
 
+    // check localStorage for high score, if it's not there, use 0
+    let highScore = localStorage.getItem(highScore);
+    if (highScore === null) {
+        highScore = 0;
+    }
+    // if player have more money than the high score, player has new high score!
+    if (playerInfo.money > highScore) {
+        localStorage.setItem('highscore', playerInfo.money);
+        localStorage.setItem('name', playerInfo.name);
+
+        console.log(`${playerInfo.name}, now has the high score of ${playerInfo.money}!`);
+    } else {
+        console.log(`${playerInfo.name} did not beat the high score of ${highScore}. Maybe next time.`);
+    }
     // if player is alive, player win!
     if (playerInfo.health > 0) {
 
