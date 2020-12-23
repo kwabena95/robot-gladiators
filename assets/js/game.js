@@ -96,11 +96,19 @@ const endGame = () => {
 
 const fight = (enemy) => {
 
+    // keep track of who goes first
+    let isPlayerTurn = true;
+    if (Math.random() > 0.5) {
+        isPlayerTurn = false;
+    }
     while (enemy.health > 0 && playerInfo.health > 0) {
-        if (fightOrSkip()) {
-            // if true, leave fight by breaking loop
-            break;
+        if (isPlayerTurn) {
+            if (fightOrSkip()) {
+                // if true, leave fight by breaking loop
+                break;
+            }
         }
+
 
         /*Subtract the value of `playerAttack` from the value of `enemyHealth` and use that result to update the value in the `enemyHealth` variable*/
         let damage = randomNumber(playerInfo.attack - 3, playerInfo.attack);
@@ -146,6 +154,8 @@ const fight = (enemy) => {
         } else {
             console.log(`${playerInfo.name} still has ${playerInfo.health} health left.`);
         }
+        // switch turn order for next round
+        isPlayerTurn = !isPlayerTurn;;
 
     }
 
