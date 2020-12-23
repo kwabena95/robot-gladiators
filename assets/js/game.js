@@ -30,6 +30,37 @@ const startGame = () => {
     endGame();
 };
 
+// fight or skip function
+const fightOrSkip = () => {
+    // ask player if they'd like to fight or skip using fightOrSkip function
+    let promptFight = prompt('Would you like FIGHT or SKIP this battle? Enter "FIGHT" or "SKIP" to choose.');
+    promptFight = promptFight.toLocaleLowerCase();
+    // Conditional Recursive Function Call
+    if (promptFight === '' || promptFight === null) {
+        console.log("You need to provide a valid answer! Please try again.");
+        return fightOrSkip();
+    }
+
+    // if player picks "skip" confirm and then stop the loop
+    if (promptFight === 'skip' || promptFight === 'SKIP') {
+        //  confirm player wants to skip
+        const confirmSkip = confirm('Are you sure you want to quit?');
+        //if yes (true), leave fight
+        if (confirmSkip) {
+            console.log(`${playerInfo.name} has decided to skip this fight. Goodbye!`);
+
+            // subtract money from player money
+            playerInfo.playerMoney = Math.max(0, playerInfo.money - 10);
+
+            // return true if player wants to leave
+            return true;
+            // call shop()
+            shop();
+        }
+    }
+
+}
+
 // function to set name
 const getPlayerName = () => {
     let name = "";
@@ -66,23 +97,9 @@ const endGame = () => {
 const fight = (enemy) => {
 
     while (enemy.health > 0 && playerInfo.health > 0) {
-        const promptFight = prompt('Would you like to FIGHT or SKIP this battle? Enter "FIGHT" or "SKIP" to choose.');
-
-        // if player choses to skip confirm and then stop the loop
-        if (promptFight === 'skip' || promptFight === 'SKIP') {
-            //confirm player wants to skip
-            const confirmSkip = confirm('Are you sure you want to quit?');
-            //if yes (true), leave fight
-            if (confirmSkip) {
-                console.log(`${playerInfo.name} has decided to skip this fight. Goodbye!`);
-
-                // subtract money from player money
-                playerInfo.playerMoney = Math.max(0, playerInfo.money - 10);
-
-                // call shop()
-                shop();
-                break;
-            }
+        if (fightOrSkip()) {
+            // if true, leave fight by breaking loop
+            break;
         }
 
         /*Subtract the value of `playerAttack` from the value of `enemyHealth` and use that result to update the value in the `enemyHealth` variable*/
